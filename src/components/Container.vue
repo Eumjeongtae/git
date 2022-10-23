@@ -31,6 +31,12 @@
 <div v-if="step == 4">
 <MyPost />
 </div>
+
+<!-- 내게시물 자세히 보기 -->
+<div v-if="step == 5">
+<MyPostDtail :이미지필터적용='이미지필터적용' />
+</div>
+
   </div>
 </template>
 
@@ -41,7 +47,7 @@
  import FilterBox from './FilterBox.vue'
  import MyPage from './MyPage.vue'
  import MyPost from './MyPost.vue'
-
+ import MyPostDtail from './MyPostDtail.vue'
 export default {
   name: 'Container',
   components: {
@@ -49,6 +55,7 @@ export default {
     FilterBox,
     MyPage,
     MyPost,
+    MyPostDtail,
 
   },
   data(){

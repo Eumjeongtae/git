@@ -52,7 +52,7 @@ export default {
             인스타원본 : [...data],
             인스타 : data,
             // z : 0,
-            step : 4,
+            step : 5,
             이미지 :'' ,
             이미지필터적용:'',
 

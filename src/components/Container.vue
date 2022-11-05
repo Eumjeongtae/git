@@ -29,12 +29,12 @@
 
 <!-- 내게시물 -->
 <div v-if="step == 4">
-<MyPost />
+<MyPost  />
 </div>
 
 <!-- 내게시물 자세히 보기 -->
 <div v-if="step == 5">
-<MyPostDtail :이미지필터적용='이미지필터적용' />
+<MyPostDtail :이미지필터적용='이미지필터적용' :id값은='id값은' />
 </div>
 
   </div>
@@ -69,6 +69,7 @@ export default {
       step: Number,
       이미지: String,
       이미지필터적용: String,
+      id값은 : Number,
     }
 
 }

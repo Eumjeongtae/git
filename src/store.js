@@ -47,6 +47,19 @@ const store = createStore({
       }
       
     },
+    좋아요2(state,i){
+      if(state.profile[1][i].liked == true){
+        state.profile[1][i].likes --;
+        state.profile[1][i].liked = false
+
+      }
+     else if(state.profile[1][i].liked == false){
+        state.profile[1][i].likes ++;
+        state.profile[1][i].liked = true
+
+      }
+      
+    },
     
   },
   actions: {

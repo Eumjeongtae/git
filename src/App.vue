@@ -1,10 +1,10 @@
 <template>
 <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li @click="step = 0">Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="step++" v-if="step == 1">Next</li>
+      <li @click="step = 2" v-if="step == 1">Next</li>
       <li v-if="step == 2"  @click="puplish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
@@ -13,9 +13,9 @@
 
   <!-- <button @click="$store.commit('콘솔')"> 버튼</button> -->
   <!-- <p>{{$store.state.more}}</p> -->
-  <Container :이미지='이미지' :step='step' :이미지필터적용='이미지필터적용'   @titleFromChild="작성한글  = $event.target.value" />
+  <Container :이미지='이미지' :step='step' :이미지필터적용='이미지필터적용' :id값은='id값은'   @titleFromChild="작성한글  = $event.target.value" />
   <!-- <button @click="more" >더보기</button> -->
-  <button v-if="step == 1" @click="getData">더보기</button>
+  <button v-if="step == 0" @click="getData">더보기</button>
   <div>
     
   </div>
@@ -52,18 +52,29 @@ export default {
             인스타원본 : [...data],
             인스타 : data,
             // z : 0,
-            step : 5,
+            step : 0,
             이미지 :'' ,
             이미지필터적용:'',
+            id값은 : '',
 
     }
   },
   mounted(){
     this.emitter.on('작명',(a)=>{
       this.이미지필터적용 = a;
-      console.log(this.이미지필터적용)
+      // console.log(this.이미지필터적용)
 
     });
+    this.emitter.on('id값2',(b)=>{
+     this.id값은 = b;
+    //  console.log(this.id값은);
+     this.step = 5;
+   });
+    this.emitter.on('step3',(b)=>{
+    //  console.log(this.id값은);
+     this.step = b;
+   });
+    
   },
   components: {
     Container : Container,
@@ -71,6 +82,7 @@ export default {
   },
   computed :{
    ...mapState(['insta']),
+   ...mapState(['profile']),
 
   },
   methods :{
@@ -90,13 +102,13 @@ export default {
      let 파일 = e.target.files;
      this.이미지 = URL.createObjectURL(파일[0])
 
-     this.step++;
+     this.step=1;
     },
 
     puplish(){
       var 내게시물 = {
-         name: "Kim Hyun",
-      userImage: "https://placeimg.com/100/100/arch",
+         name: this.profile[0].name,
+      userImage: this.profile[0].userImage,
       postImage: this.이미지,
       likes: 36,
       date: "May 15",
@@ -105,6 +117,7 @@ export default {
       filter: this.이미지필터적용
       };
       this.insta.unshift(내게시물);
+      this.profile[1].unshift(내게시물);
       this.step=0
     },
  

@@ -56,10 +56,12 @@ export default {
             이미지 :'' ,
             이미지필터적용:'',
             id값은 : '',
+            
 
     }
   },
   mounted(){
+
     this.emitter.on('작명',(a)=>{
       this.이미지필터적용 = a;
       // console.log(this.이미지필터적용)
@@ -74,7 +76,13 @@ export default {
     //  console.log(this.id값은);
      this.step = b;
    });
-    
+   for(let i=0; i <this.profile[1].length; i++){
+   this.인스타.push(this.profile[1][i]);
+   }
+
+    this.인스타.sort((a, b) => new Date(b.dates) - new Date(a.dates))
+   
+  
   },
   components: {
     Container : Container,
@@ -106,12 +114,20 @@ export default {
     },
 
     puplish(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const dateStr = year + '-' + month + '-' + day;
+    console.log(dateStr);
+
       var 내게시물 = {
          name: this.profile[0].name,
       userImage: this.profile[0].userImage,
       postImage: this.이미지,
-      likes: 36,
-      date: "May 15",
+      likes: 0,
+      date: `${year}년 ${month}월 ${day}일`,
+      dates: dateStr,
       liked: false,
       content: this.작성한글 ,
       filter: this.이미지필터적용

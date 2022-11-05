@@ -7,6 +7,8 @@ import data2 from './assets/MyData.js'
 const store = createStore({
   state(){
     return {
+      profileOrigin : [...data2],
+      instaOrigin : [...data],
       profile : data2,
       insta : data,
       name:'kim',
